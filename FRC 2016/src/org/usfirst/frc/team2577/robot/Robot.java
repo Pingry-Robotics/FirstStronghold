@@ -61,7 +61,7 @@ public class Robot extends IterativeRobot {
     }
 
    public void teleopPeriodic() {
-	   drive.tankDrive(drivecontroller.getRawAxis(1), drivecontroller.getRawAxis(5));
+	   drive.tankDrive(drivecontroller.getRawAxis(1), -drivecontroller.getRawAxis(5));
        Timer.delay(0.005);
     }
     
