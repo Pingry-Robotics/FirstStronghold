@@ -1,8 +1,6 @@
 /*
  * Jack Proudfoot
  * Febuary 20, 2016
- * Version 0.1.0
- * 
  */
 
 package org.usfirst.frc.team2577.robot;
