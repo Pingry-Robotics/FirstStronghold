@@ -27,7 +27,10 @@ public class Robot extends IterativeRobot {
         chooser.addObject("My Auto", customAuto);
         SmartDashboard.putData("Auto choices", chooser);
         
-        this.drive = new RobotDrive(0,1);
+        this.drive = new RobotDrive(0,1,2,3);
+        drive.setSafetyEnabled(true);
+        
+        this.drivecontroller = new Joystick(0);
     }
     
 	/**
@@ -58,7 +61,8 @@ public class Robot extends IterativeRobot {
     }
 
    public void teleopPeriodic() {
-        
+	   drive.tankDrive(drivecontroller.getRawAxis(1), drivecontroller.getRawAxis(5));
+       Timer.delay(0.005);
     }
     
     public void testPeriodic() {
