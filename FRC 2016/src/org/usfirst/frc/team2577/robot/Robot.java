@@ -69,10 +69,10 @@ public class Robot extends IterativeRobot {
 	   drive.tankDrive(drivecontroller.getRawAxis(1), -drivecontroller.getRawAxis(5));
 	   
 	   if (drivecontroller.getRawAxis(2) > .5) {
-		  linearActuator.set(.8);
+		  linearActuator.set(.5);
 	   }
 	   else if (drivecontroller.getRawAxis(3) > .5) {
-		   linearActuator.set(-.8);
+		   linearActuator.set(-.5);
 	   }
 	   else{
 		   linearActuator.set(0);
