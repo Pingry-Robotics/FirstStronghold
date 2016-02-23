@@ -8,6 +8,7 @@ package org.usfirst.frc.team2577.robot;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -19,6 +20,7 @@ public class Robot extends IterativeRobot {
     SendableChooser chooser;
     
     RobotDrive drive;
+    Talon linearActuator; 
     Joystick drivecontroller;
 	
    public void robotInit() {
@@ -28,6 +30,9 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData("Auto choices", chooser);
         
         this.drive = new RobotDrive(0,1,2,3);
+        this.linearActuator = new Talon(4);
+        
+        linearActuator.setSafetyEnabled(true);
         drive.setSafetyEnabled(true);
         
         this.drivecontroller = new Joystick(0);
@@ -62,6 +67,13 @@ public class Robot extends IterativeRobot {
 
    public void teleopPeriodic() {
 	   drive.tankDrive(drivecontroller.getRawAxis(1), -drivecontroller.getRawAxis(5));
+	   
+	   if (drivecontroller.getRawAxis(2) > .5) {
+		  linearActuator.set(.5);
+	   }
+	   else if (drivecontroller.getRawAxis(3) > .5) {
+		   linearActuator.set(-.5);
+	   }
        Timer.delay(0.005);
     }
     
