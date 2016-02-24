@@ -21,8 +21,12 @@ public class Robot extends IterativeRobot {
     SendableChooser chooser;
     
     RobotDrive drive;
+    RobotDrive d;
     Talon linearActuator; 
+    Talon winch;
+    
     Joystick drivecontroller;
+    Joystick ballController;
     
     DigitalInput linearTop;
     DigitalInput linearBot;
@@ -35,6 +39,7 @@ public class Robot extends IterativeRobot {
         
         this.drive = new RobotDrive(0,1,2,3);
         this.linearActuator = new Talon(4);
+        this.winch = new Talon(5);
         
         linearActuator.setSafetyEnabled(true);
         drive.setSafetyEnabled(true);
@@ -43,6 +48,7 @@ public class Robot extends IterativeRobot {
         this.linearBot = new DigitalInput(1);
         
         this.drivecontroller = new Joystick(0);
+        this.ballController = new Joystick(1);
     }
     
 	/**
@@ -82,7 +88,17 @@ public class Robot extends IterativeRobot {
 		   linearActuator.set(-.5);
 	   }
 	   else{
-		   linearActuator.set(0);
+		   linearActuator.stopMotor();
+	   }
+	   
+	   if (drivecontroller.getPOV() == 0) {
+		   winch.set(.75);
+	   }
+	   else if (drivecontroller.getPOV() == 180) {
+		   winch.set(-.75);
+	   }
+	   else {
+		   winch.stopMotor();
 	   }
 
        Timer.delay(0.005);
